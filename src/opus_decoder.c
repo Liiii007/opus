@@ -292,7 +292,7 @@ static int opus_decode_frame_new(OpusDecoder *st, const unsigned char *data,
       audiosize = st->frame_size;
       mode = st->mode;
       bandwidth = st->bandwidth;
-      ec_dec_init(&dec,(unsigned char*)data,len);
+      ec_dec_init_new(&dec,(unsigned char*)data,len);
    } else {
       audiosize = frame_size;
       /* Run PLC using last used mode (CELT if we ended with CELT redundancy) */

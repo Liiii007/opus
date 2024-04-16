@@ -203,7 +203,7 @@ int opus_multistream_decode_native_new(
       return OPUS_BAD_ARG;
    }
    /* Limit frame_size to avoid excessive stack allocations. */
-   MUST_SUCCEED(opus_multistream_decoder_ctl(st, OPUS_GET_SAMPLE_RATE(&Fs)));
+   MUST_SUCCEED(opus_multistream_decoder_ctl_new(st, OPUS_GET_SAMPLE_RATE(&Fs)));
    frame_size = IMIN(frame_size, Fs/25*3);
    ALLOC(buf, 2*frame_size, opus_val16);
    ptr = (char*)st + align(sizeof(OpusMSDecoder));
@@ -307,7 +307,7 @@ int opus_multistream_decode_native_new(
 }
 
 #if !defined(DISABLE_FLOAT_API)
-static void opus_copy_channel_out_float(
+static void opus_copy_channel_out_float_new(
   void *dst,
   int dst_stride,
   int dst_channel,
@@ -412,7 +412,7 @@ int opus_multistream_decode_float_new(
 )
 {
    return opus_multistream_decode_native_new(st, data, len,
-       pcm, opus_copy_channel_out_float, frame_size, decode_fec, 0, NULL);
+       pcm, opus_copy_channel_out_float_new, frame_size, decode_fec, 0, NULL);
 }
 #endif
 
@@ -536,7 +536,7 @@ bad_arg:
    return OPUS_BAD_ARG;
 }
 
-int opus_multistream_decoder_ctl(OpusMSDecoder *st, int request, ...)
+int opus_multistream_decoder_ctl_new(OpusMSDecoder *st, int request, ...)
 {
    int ret;
    va_list ap;

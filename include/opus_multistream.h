@@ -641,7 +641,7 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_decode_float_new(
   * @see opus_decoderctls
   * @see opus_multistream_ctls
   */
-OPUS_EXPORT int opus_multistream_decoder_ctl(OpusMSDecoder *st, int request, ...) OPUS_ARG_NONNULL(1);
+OPUS_EXPORT int opus_multistream_decoder_ctl_new(OpusMSDecoder *st, int request, ...) OPUS_ARG_NONNULL(1);
 
 /** Frees an <code>OpusMSDecoder</code> allocated by
   * opus_multistream_decoder_create().

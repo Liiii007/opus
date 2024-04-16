@@ -1107,7 +1107,7 @@ int celt_decode_with_ec_dred_new(CELTDecoder * OPUS_RESTRICT st, const unsigned 
 
    if (dec == NULL)
    {
-      ec_dec_init(&_dec,(unsigned char*)data,len);
+      ec_dec_init_new(&_dec,(unsigned char*)data,len);
       dec = &_dec;
    }
 
