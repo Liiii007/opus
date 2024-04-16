@@ -116,7 +116,7 @@ static void ec_dec_normalize(ec_dec *_this){
   }
 }
 
-void ec_dec_init(ec_dec *_this,unsigned char *_buf,opus_uint32 _storage){
+void ec_dec_init_new(ec_dec *_this,unsigned char *_buf,opus_uint32 _storage){
   _this->buf=_buf;
   _this->storage=_storage;
   _this->end_offs=0;

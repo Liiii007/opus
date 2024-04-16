@@ -33,7 +33,7 @@
 /*Initializes the decoder.
   _buf: The input buffer to use.
   Return: 0 on success, or a negative value on error.*/
-void ec_dec_init(ec_dec *_this,unsigned char *_buf,opus_uint32 _storage);
+void ec_dec_init_new(ec_dec *_this,unsigned char *_buf,opus_uint32 _storage);
 
 /*Calculates the cumulative frequency for the next symbol.
   This can then be fed into the probability model to determine what that
