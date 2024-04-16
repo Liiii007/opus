@@ -223,7 +223,7 @@ int opus_projection_decode(OpusProjectionDecoder *st, const unsigned char *data,
                            opus_int32 len, opus_int16 *pcm, int frame_size,
                            int decode_fec)
 {
-  return opus_multistream_decode_native(get_multistream_decoder(st), data, len,
+  return opus_multistream_decode_native_new(get_multistream_decoder(st), data, len,
     pcm, opus_projection_copy_channel_out_short, frame_size, decode_fec, 1,
     get_dec_demixing_matrix(st));
 }
@@ -233,7 +233,7 @@ int opus_projection_decode(OpusProjectionDecoder *st, const unsigned char *data,
 int opus_projection_decode_float(OpusProjectionDecoder *st, const unsigned char *data,
                                  opus_int32 len, float *pcm, int frame_size, int decode_fec)
 {
-  return opus_multistream_decode_native(get_multistream_decoder(st), data, len,
+  return opus_multistream_decode_native_new(get_multistream_decoder(st), data, len,
     pcm, opus_projection_copy_channel_out_float, frame_size, decode_fec, 0,
     get_dec_demixing_matrix(st));
 }

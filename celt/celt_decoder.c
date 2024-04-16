@@ -967,7 +967,7 @@ static void celt_decode_lost(CELTDecoder * OPUS_RESTRICT st, int N, int LM
    RESTORE_STACK;
 }
 
-int celt_decode_with_ec_dred(CELTDecoder * OPUS_RESTRICT st, const unsigned char *data,
+int celt_decode_with_ec_dred_new(CELTDecoder * OPUS_RESTRICT st, const unsigned char *data,
       int len, opus_val16 * OPUS_RESTRICT pcm, int frame_size, ec_dec *dec, int accum
 #ifdef ENABLE_DEEP_PLC
       ,LPCNetPLCState *lpcnet
@@ -1271,7 +1271,7 @@ int celt_decode_with_ec_dred(CELTDecoder * OPUS_RESTRICT st, const unsigned char
 
    ALLOC(X, C*N, celt_norm);   /**< Interleaved normalised MDCTs */
 
-   quant_all_bands(0, mode, start, end, X, C==2 ? X+N : NULL, collapse_masks,
+   opus_quant_all_bands_new(0, mode, start, end, X, C==2 ? X+N : NULL, collapse_masks,
          NULL, pulses, shortBlocks, spread_decision, dual_stereo, intensity, tf_res,
          len*(8<<BITRES)-anti_collapse_rsv, balance, dec, LM, codedBands, &st->rng, 0,
          st->arch, st->disable_inv);
@@ -1371,7 +1371,7 @@ int celt_decode_with_ec_dred(CELTDecoder * OPUS_RESTRICT st, const unsigned char
 int celt_decode_with_ec(CELTDecoder * OPUS_RESTRICT st, const unsigned char *data,
       int len, opus_val16 * OPUS_RESTRICT pcm, int frame_size, ec_dec *dec, int accum)
 {
-   return celt_decode_with_ec_dred(st, data, len, pcm, frame_size, dec, accum
+   return celt_decode_with_ec_dred_new(st, data, len, pcm, frame_size, dec, accum
 #ifdef ENABLE_DEEP_PLC
        , NULL
 #endif

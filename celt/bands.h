@@ -103,7 +103,7 @@ void haar1(celt_norm *X, int N0, int stride);
  * @param seed Random generator seed
  * @param arch Run-time architecture (see opus_select_arch())
  */
-void quant_all_bands(int encode, const CELTMode *m, int start, int end,
+void opus_quant_all_bands_new(int encode, const CELTMode *m, int start, int end,
       celt_norm * X, celt_norm * Y, unsigned char *collapse_masks,
       const celt_ener *bandE, int *pulses, int shortBlocks, int spread,
       int dual_stereo, int intensity, int *tf_res, opus_int32 total_bits,

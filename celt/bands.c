@@ -1395,7 +1395,7 @@ static void special_hybrid_folding(const CELTMode *m, celt_norm *norm, celt_norm
 }
 #endif
 
-void quant_all_bands(int encode, const CELTMode *m, int start, int end,
+void opus_quant_all_bands_new(int encode, const CELTMode *m, int start, int end,
       celt_norm *X_, celt_norm *Y_, unsigned char *collapse_masks,
       const celt_ener *bandE, int *pulses, int shortBlocks, int spread,
       int dual_stereo, int intensity, int *tf_res, opus_int32 total_bits,

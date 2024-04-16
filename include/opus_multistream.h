@@ -620,7 +620,7 @@ OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_decode(
   * @returns Number of samples decoded on success or a negative error code
   *          (see @ref opus_errorcodes) on failure.
   */
-OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_decode_float(
+OPUS_EXPORT OPUS_WARN_UNUSED_RESULT int opus_multistream_decode_float_new(
     OpusMSDecoder *st,
     const unsigned char *data,
     opus_int32 len,

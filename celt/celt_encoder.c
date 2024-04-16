@@ -2235,7 +2235,7 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
 
    /* Residual quantisation */
    ALLOC(collapse_masks, C*nbEBands, unsigned char);
-   quant_all_bands(1, mode, start, end, X, C==2 ? X+N : NULL, collapse_masks,
+   opus_quant_all_bands_new(1, mode, start, end, X, C==2 ? X+N : NULL, collapse_masks,
          bandE, pulses, shortBlocks, st->spread_decision,
          dual_stereo, st->intensity, tf_res, nbCompressedBytes*(8<<BITRES)-anti_collapse_rsv,
          balance, enc, LM, codedBands, &st->rng, st->complexity, st->arch, st->disable_inv);
