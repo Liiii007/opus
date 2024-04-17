@@ -97,7 +97,7 @@ int ec_dec_icdf16(ec_dec *_this,const opus_uint16 *_icdf,unsigned _ftb);
   _ft: The number of integers that can be decoded (one more than the max).
        This must be at least 2, and no more than 2**32-1.
   Return: The decoded bits.*/
-opus_uint32 ec_dec_uint(ec_dec *_this,opus_uint32 _ft);
+opus_uint32 ec_dec_uint_new(ec_dec *_this,opus_uint32 _ft);
 
 /*Extracts a sequence of raw bits from the stream.
   The bits must have been encoded with ec_enc_bits().
@@ -105,6 +105,6 @@ opus_uint32 ec_dec_uint(ec_dec *_this,opus_uint32 _ft);
   _ftb: The number of bits to extract.
         This must be between 0 and 25, inclusive.
   Return: The decoded bits.*/
-opus_uint32 ec_dec_bits(ec_dec *_this,unsigned _ftb);
+opus_uint32 ec_dec_bits_new(ec_dec *_this,unsigned _ftb);
 
 #endif

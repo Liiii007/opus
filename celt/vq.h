@@ -69,7 +69,7 @@ unsigned alg_quant(celt_norm *X, int N, int K, int spread, int B, ec_enc *enc,
  * @param dec Entropy decoder state
  * @ret A mask indicating which blocks in the band received pulses
  */
-unsigned alg_unquant(celt_norm *X, int N, int K, int spread, int B,
+unsigned alg_unquant_new(celt_norm *X, int N, int K, int spread, int B,
       ec_dec *dec, opus_val16 gain);
 
 void renormalise_vector(celt_norm *X, int N, opus_val16 gain, int arch);

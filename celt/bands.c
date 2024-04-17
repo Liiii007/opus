@@ -797,9 +797,9 @@ static void compute_theta(struct band_ctx *ctx, struct split_ctx *sctx,
       } else if (B0>1 || stereo) {
          /* Uniform pdf */
          if (encode)
-            ec_enc_uint(ec, itheta, qn+1);
+            ec_enc_uint_new(ec, itheta, qn+1);
          else
-            itheta = ec_dec_uint(ec, qn+1);
+            itheta = ec_dec_uint_new(ec, qn+1);
       } else {
          int fs=1, ft;
          ft = ((qn>>1)+1)*((qn>>1)+1);
@@ -861,7 +861,7 @@ static void compute_theta(struct band_ctx *ctx, struct split_ctx *sctx,
       if (*b>2<<BITRES && ctx->remaining_bits > 2<<BITRES)
       {
          if (encode)
-            ec_enc_bit_logp(ec, inv, 2);
+            ec_enc_bit_logp_new(ec, inv, 2);
          else
             inv = ec_dec_bit_logp(ec, 2);
       } else
@@ -923,7 +923,7 @@ static unsigned quant_band_n1(struct band_ctx *ctx, celt_norm *X, celt_norm *Y,
             sign = x[0]<0;
             ec_enc_bits(ec, sign, 1);
          } else {
-            sign = ec_dec_bits(ec, 1);
+            sign = ec_dec_bits_new(ec, 1);
          }
          ctx->remaining_bits -= 1<<BITRES;
       }
@@ -1057,7 +1057,7 @@ static unsigned quant_partition(struct band_ctx *ctx, celt_norm *X,
          {
             cm = alg_quant(X, N, K, spread, B, ec, gain, ctx->resynth, ctx->arch);
          } else {
-            cm = alg_unquant(X, N, K, spread, B, ec, gain);
+            cm = alg_unquant_new(X, N, K, spread, B, ec, gain);
          }
       } else {
          /* If there's no pulse, fill the band anyway */
@@ -1302,7 +1302,7 @@ static unsigned quant_band_stereo(struct band_ctx *ctx, celt_norm *X, celt_norm 
             sign = x2[0]*y2[1] - x2[1]*y2[0] < 0;
             ec_enc_bits(ec, sign, 1);
          } else {
-            sign = ec_dec_bits(ec, 1);
+            sign = ec_dec_bits_new(ec, 1);
          }
       }
       sign = 1-2*sign;

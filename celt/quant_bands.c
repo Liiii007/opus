@@ -166,7 +166,7 @@ static int quant_coarse_energy_impl(const CELTMode *m, int start, int end,
    opus_val16 beta;
 
    if (tell+3 <= budget)
-      ec_enc_bit_logp(enc, intra, 3);
+      ec_enc_bit_logp_new(enc, intra, 3);
    if (intra)
    {
       coef = 0;
@@ -239,7 +239,7 @@ static int quant_coarse_energy_impl(const CELTMode *m, int start, int end,
          else if(budget-tell >= 1)
          {
             qi = IMIN(0, qi);
-            ec_enc_bit_logp(enc, -qi, 1);
+            ec_enc_bit_logp_new(enc, -qi, 1);
          }
          else
             qi = -1;
@@ -425,7 +425,7 @@ void quant_energy_finalise(const CELTMode *m, int start, int end, opus_val16 *ol
    }
 }
 
-void unquant_coarse_energy(const CELTMode *m, int start, int end, opus_val16 *oldEBands, int intra, ec_dec *dec, int C, int LM)
+void unquant_coarse_energy_new(const CELTMode *m, int start, int end, opus_val16 *oldEBands, int intra, ec_dec *dec, int C, int LM)
 {
    const unsigned char *prob_model = e_prob_model[LM][intra];
    int i, c;
@@ -502,7 +502,7 @@ void unquant_fine_energy(const CELTMode *m, int start, int end, opus_val16 *oldE
       do {
          int q2;
          opus_val16 offset;
-         q2 = ec_dec_bits(dec, fine_quant[i]);
+         q2 = ec_dec_bits_new(dec, fine_quant[i]);
 #ifdef FIXED_POINT
          offset = SUB16(SHR32(SHL32(EXTEND32(q2),DB_SHIFT)+QCONST16(.5f,DB_SHIFT),fine_quant[i]),QCONST16(.5f,DB_SHIFT));
 #else
@@ -513,7 +513,7 @@ void unquant_fine_energy(const CELTMode *m, int start, int end, opus_val16 *oldE
    }
 }
 
-void unquant_energy_finalise(const CELTMode *m, int start, int end, opus_val16 *oldEBands, int *fine_quant,  int *fine_priority, int bits_left, ec_dec *dec, int C)
+void unquant_energy_finalise_new(const CELTMode *m, int start, int end, opus_val16 *oldEBands, int *fine_quant,  int *fine_priority, int bits_left, ec_dec *dec, int C)
 {
    int i, prio, c;
 
@@ -528,7 +528,7 @@ void unquant_energy_finalise(const CELTMode *m, int start, int end, opus_val16 *
          do {
             int q2;
             opus_val16 offset;
-            q2 = ec_dec_bits(dec, 1);
+            q2 = ec_dec_bits_new(dec, 1);
 #ifdef FIXED_POINT
             offset = SHR16(SHL16(q2,DB_SHIFT)-QCONST16(.5f,DB_SHIFT),fine_quant[i]+1);
 #else

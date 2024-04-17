@@ -2169,11 +2169,11 @@ static opus_int32 opus_encode_frame_native(OpusEncoder *st, const opus_val16 *pc
     {
         /* For SILK mode, the redundancy is inferred from the length */
         if (st->mode == MODE_HYBRID)
-           ec_enc_bit_logp(&enc, redundancy, 12);
+           ec_enc_bit_logp_new(&enc, redundancy, 12);
         if (redundancy)
         {
             int max_redundancy;
-            ec_enc_bit_logp(&enc, celt_to_silk, 1);
+            ec_enc_bit_logp_new(&enc, celt_to_silk, 1);
             if (st->mode == MODE_HYBRID)
             {
                /* Reserve the 8 bits needed for the redundancy length,
@@ -2187,7 +2187,7 @@ static opus_int32 opus_encode_frame_native(OpusEncoder *st, const opus_val16 *pc
             redundancy_bytes = IMIN(max_redundancy, redundancy_bytes);
             redundancy_bytes = IMIN(257, IMAX(2, redundancy_bytes));
             if (st->mode == MODE_HYBRID)
-                ec_enc_uint(&enc, redundancy_bytes-2, 256);
+                ec_enc_uint_new(&enc, redundancy_bytes-2, 256);
         }
     } else {
         redundancy = 0;

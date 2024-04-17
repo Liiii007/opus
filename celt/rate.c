@@ -363,10 +363,10 @@ static OPUS_INLINE int interp_bits2pulses(const CELTMode *m, int start, int end,
             if (codedBands<=start+2 || (band_bits > (depth_threshold*band_width<<LM<<BITRES)>>4 && j<=signalBandwidth))
 #endif
             {
-               ec_enc_bit_logp(ec, 1, 1);
+               ec_enc_bit_logp_new(ec, 1, 1);
                break;
             }
-            ec_enc_bit_logp(ec, 0, 1);
+            ec_enc_bit_logp_new(ec, 0, 1);
          } else if (ec_dec_bit_logp(ec, 1)) {
             break;
          }
@@ -397,10 +397,10 @@ static OPUS_INLINE int interp_bits2pulses(const CELTMode *m, int start, int end,
       if (encode)
       {
          *intensity = IMIN(*intensity, codedBands);
-         ec_enc_uint(ec, *intensity-start, codedBands+1-start);
+         ec_enc_uint_new(ec, *intensity-start, codedBands+1-start);
       }
       else
-         *intensity = start+ec_dec_uint(ec, codedBands+1-start);
+         *intensity = start+ec_dec_uint_new(ec, codedBands+1-start);
    }
    else
       *intensity = 0;
@@ -412,7 +412,7 @@ static OPUS_INLINE int interp_bits2pulses(const CELTMode *m, int start, int end,
    if (dual_stereo_rsv > 0)
    {
       if (encode)
-         ec_enc_bit_logp(ec, *dual_stereo, 1);
+         ec_enc_bit_logp_new(ec, *dual_stereo, 1);
       else
          *dual_stereo = ec_dec_bit_logp(ec, 1);
    }

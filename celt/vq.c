@@ -360,7 +360,7 @@ unsigned alg_quant(celt_norm *X, int N, int K, int spread, int B, ec_enc *enc,
 
 /** Decode pulse vector and combine the result with the pitch vector to produce
     the final normalised signal in the current band. */
-unsigned alg_unquant(celt_norm *X, int N, int K, int spread, int B,
+unsigned alg_unquant_new(celt_norm *X, int N, int K, int spread, int B,
       ec_dec *dec, opus_val16 gain)
 {
    opus_val32 Ryy;

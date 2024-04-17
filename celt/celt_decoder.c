@@ -1141,9 +1141,9 @@ int celt_decode_with_ec_dred_new(CELTDecoder * OPUS_RESTRICT st, const unsigned 
       if(ec_dec_bit_logp(dec, 1))
       {
          int qg, octave;
-         octave = ec_dec_uint(dec, 6);
-         postfilter_pitch = (16<<octave)+ec_dec_bits(dec, 4+octave)-1;
-         qg = ec_dec_bits(dec, 3);
+         octave = ec_dec_uint_new(dec, 6);
+         postfilter_pitch = (16<<octave)+ec_dec_bits_new(dec, 4+octave)-1;
+         qg = ec_dec_bits_new(dec, 3);
          if (ec_tell(dec)+2<=total_bits)
             postfilter_tapset = ec_dec_icdf(dec, tapset_icdf, 2);
          postfilter_gain = QCONST16(.09375f,15)*(qg+1);
@@ -1197,7 +1197,7 @@ int celt_decode_with_ec_dred_new(CELTDecoder * OPUS_RESTRICT st, const unsigned 
       } while (++c<2);
    }
    /* Get band energies */
-   unquant_coarse_energy(mode, start, end, oldBandE,
+   unquant_coarse_energy_new(mode, start, end, oldBandE,
          intra_ener, dec, C, LM);
 
    ALLOC(tf_res, nbEBands, int);
@@ -1278,10 +1278,10 @@ int celt_decode_with_ec_dred_new(CELTDecoder * OPUS_RESTRICT st, const unsigned 
 
    if (anti_collapse_rsv > 0)
    {
-      anti_collapse_on = ec_dec_bits(dec, 1);
+      anti_collapse_on = ec_dec_bits_new(dec, 1);
    }
 
-   unquant_energy_finalise(mode, start, end, oldBandE,
+   unquant_energy_finalise_new(mode, start, end, oldBandE,
          fine_quant, fine_priority, len*8-ec_tell(dec), dec, C);
 
    if (anti_collapse_on)

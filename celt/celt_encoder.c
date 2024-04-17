@@ -772,7 +772,7 @@ static void tf_encode(int start, int end, int isTransient, int *tf_res, int LM, 
    {
       if (tell+logp<=budget)
       {
-         ec_enc_bit_logp(enc, tf_res[i] ^ curr, logp);
+         ec_enc_bit_logp_new(enc, tf_res[i] ^ curr, logp);
          tell = ec_tell(enc);
          curr = tf_res[i];
          tf_changed |= curr;
@@ -785,7 +785,7 @@ static void tf_encode(int start, int end, int isTransient, int *tf_res, int LM, 
    if (tf_select_rsv &&
          tf_select_table[LM][4*isTransient+0+tf_changed]!=
          tf_select_table[LM][4*isTransient+2+tf_changed])
-      ec_enc_bit_logp(enc, tf_select, 1);
+      ec_enc_bit_logp_new(enc, tf_select, 1);
    else
       tf_select = 0;
    for (i=start;i<end;i++)
@@ -1654,7 +1654,7 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
       silence = 1;
 #endif
    if (tell==1)
-      ec_enc_bit_logp(enc, silence, 15);
+      ec_enc_bit_logp_new(enc, silence, 15);
    else
       silence=0;
    if (silence)
@@ -1698,15 +1698,15 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
       if (pf_on==0)
       {
          if(!hybrid && tell+16<=total_bits)
-            ec_enc_bit_logp(enc, 0, 1);
+            ec_enc_bit_logp_new(enc, 0, 1);
       } else {
          /*This block is not gated by a total bits check only because
            of the nbAvailableBytes check above.*/
          int octave;
-         ec_enc_bit_logp(enc, 1, 1);
+         ec_enc_bit_logp_new(enc, 1, 1);
          pitch_index += 1;
          octave = EC_ILOG(pitch_index)-5;
-         ec_enc_uint(enc, octave, 6);
+         ec_enc_uint_new(enc, octave, 6);
          ec_enc_bits(enc, pitch_index-(16<<octave), 4+octave);
          pitch_index -= 1;
          ec_enc_bits(enc, qg, 3);
@@ -1895,7 +1895,7 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
    }
 
    if (LM>0 && ec_tell(enc)+3<=total_bits)
-      ec_enc_bit_logp(enc, isTransient, 3);
+      ec_enc_bit_logp_new(enc, isTransient, 3);
 
    ALLOC(X, C*N, celt_norm);         /**< Interleaved normalised MDCTs */
 
@@ -2035,7 +2035,7 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
       {
          int flag;
          flag = j<offsets[i];
-         ec_enc_bit_logp(enc, flag, dynalloc_loop_logp);
+         ec_enc_bit_logp_new(enc, flag, dynalloc_loop_logp);
          tell = ec_tell_frac(enc);
          if (!flag)
             break;

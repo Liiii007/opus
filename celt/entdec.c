@@ -216,7 +216,7 @@ int ec_dec_icdf16(ec_dec *_this,const opus_uint16 *_icdf,unsigned _ftb){
   return ret;
 }
 
-opus_uint32 ec_dec_uint(ec_dec *_this,opus_uint32 _ft){
+opus_uint32 ec_dec_uint_new(ec_dec *_this,opus_uint32 _ft){
   unsigned ft;
   unsigned s;
   int      ftb;
@@ -230,7 +230,7 @@ opus_uint32 ec_dec_uint(ec_dec *_this,opus_uint32 _ft){
     ft=(unsigned)(_ft>>ftb)+1;
     s=ec_decode(_this,ft);
     ec_dec_update(_this,s,s+1,ft);
-    t=(opus_uint32)s<<ftb|ec_dec_bits(_this,ftb);
+    t=(opus_uint32)s<<ftb|ec_dec_bits_new(_this,ftb);
     if(t<=_ft)return t;
     _this->error=1;
     return _ft;
@@ -243,7 +243,7 @@ opus_uint32 ec_dec_uint(ec_dec *_this,opus_uint32 _ft){
   }
 }
 
-opus_uint32 ec_dec_bits(ec_dec *_this,unsigned _bits){
+opus_uint32 ec_dec_bits_new(ec_dec *_this,unsigned _bits){
   ec_window   window;
   int         available;
   opus_uint32 ret;

@@ -148,7 +148,7 @@ void ec_encode_bin(ec_enc *_this,unsigned _fl,unsigned _fh,unsigned _bits){
 }
 
 /*The probability of having a "one" is 1/(1<<_logp).*/
-void ec_enc_bit_logp(ec_enc *_this,int _val,unsigned _logp){
+void ec_enc_bit_logp_new(ec_enc *_this,int _val,unsigned _logp){
   opus_uint32 r;
   opus_uint32 s;
   opus_uint32 l;
@@ -183,7 +183,7 @@ void ec_enc_icdf16(ec_enc *_this,int _s,const opus_uint16 *_icdf,unsigned _ftb){
   ec_enc_normalize(_this);
 }
 
-void ec_enc_uint(ec_enc *_this,opus_uint32 _fl,opus_uint32 _ft){
+void ec_enc_uint_new(ec_enc *_this,opus_uint32 _fl,opus_uint32 _ft){
   unsigned  ft;
   unsigned  fl;
   int       ftb;

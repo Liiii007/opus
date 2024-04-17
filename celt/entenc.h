@@ -53,7 +53,7 @@ void ec_encode(ec_enc *_this,unsigned _fl,unsigned _fh,unsigned _ft);
 void ec_encode_bin(ec_enc *_this,unsigned _fl,unsigned _fh,unsigned _bits);
 
 /* Encode a bit that has a 1/(1<<_logp) probability of being a one */
-void ec_enc_bit_logp(ec_enc *_this,int _val,unsigned _logp);
+void ec_enc_bit_logp_new(ec_enc *_this,int _val,unsigned _logp);
 
 /*Encodes a symbol given an "inverse" CDF table.
   _s:    The index of the symbol to encode.
@@ -77,7 +77,7 @@ void ec_enc_icdf16(ec_enc *_this,int _s,const opus_uint16 *_icdf,unsigned _ftb);
   _fl: The integer to encode.
   _ft: The number of integers that can be encoded (one more than the max).
        This must be at least 2, and no more than 2**32-1.*/
-void ec_enc_uint(ec_enc *_this,opus_uint32 _fl,opus_uint32 _ft);
+void ec_enc_uint_new(ec_enc *_this,opus_uint32 _fl,opus_uint32 _ft);
 
 /*Encodes a sequence of raw bits in the stream.
   _fl:  The bits to encode.

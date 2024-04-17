@@ -457,7 +457,7 @@ static opus_uint32 icwrs(int _n,const int *_y){
 
 void encode_pulses(const int *_y,int _n,int _k,ec_enc *_enc){
   celt_assert(_k>0);
-  ec_enc_uint(_enc,icwrs(_n,_y),CELT_PVQ_V(_n,_k));
+  ec_enc_uint_new(_enc,icwrs(_n,_y),CELT_PVQ_V(_n,_k));
 }
 
 static opus_val32 cwrsi(int _n,int _k,opus_uint32 _i,int *_y){
@@ -537,7 +537,7 @@ static opus_val32 cwrsi(int _n,int _k,opus_uint32 _i,int *_y){
 }
 
 opus_val32 decode_pulses(int *_y,int _n,int _k,ec_dec *_dec){
-  return cwrsi(_n,_k,ec_dec_uint(_dec,CELT_PVQ_V(_n,_k)),_y);
+  return cwrsi(_n,_k,ec_dec_uint_new(_dec,CELT_PVQ_V(_n,_k)),_y);
 }
 
 #else /* SMALL_FOOTPRINT */
